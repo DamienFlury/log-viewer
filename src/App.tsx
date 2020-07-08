@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+} from '@material-ui/core';
+import LogList from './components/LogList';
+import { RecoilRoot } from 'recoil';
+import ChooseFile from './components/ChooseFile';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+      <CssBaseline />
+      <BrowserRouter>
+        <AppBar position="sticky" style={{ top: 0 }}>
+          <Toolbar>
+            <Typography variant="h6">Log Viewer</Typography>
+            <Link to="/list">
+              <Button color="inherit" style={{ color: 'white'}}>List View</Button>
+            </Link>
+          </Toolbar>
+        </AppBar>
+        <Switch>
+          <Route path="/list">
+            <LogList />
+          </Route>
+          <Route path="/">
+            <ChooseFile />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 
