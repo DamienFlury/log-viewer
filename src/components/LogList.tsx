@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState  } from 'react';
 import {
   Typography,
   TableContainer,
@@ -11,8 +11,8 @@ import {
   MenuItem,
   InputLabel,
 } from '@material-ui/core';
-import { useRecoilState } from 'recoil';
-import logsAtom, { LogLevel, Log } from '../atoms';
+import logsAtom, { LogLevel } from '../atoms';
+import { useRecoilValue } from 'recoil';
 
 
 const getLevelColor = (level: LogLevel) => {
@@ -34,12 +34,8 @@ const getLevelColor = (level: LogLevel) => {
   }
 };
 
-
-
-
-
 const LogList = () => {
-  const [logs, setLogs] = useRecoilState(logsAtom);
+  const logs = useRecoilValue(logsAtom);
 
   const [levelFilter, setLevelFilter] = useState<LogLevel | 'ALL'>('ALL');
   return (

@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, {  useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import logsAtom, { Log, LogLevel } from '../atoms';
+import { Typography } from '@material-ui/core';
 
 const parseLogs = (logs: string): Log[] => {
   const lines = logs.split('\n');
@@ -23,7 +24,7 @@ const parseLogs = (logs: string): Log[] => {
 };
 
 const ChooseFile: React.FC = () => {
-  const [logs, setLogs] = useRecoilState(logsAtom);
+  const setLogs = useSetRecoilState(logsAtom);
 
   const onDrop = useCallback(
     (files) => {
@@ -40,14 +41,15 @@ const ChooseFile: React.FC = () => {
   const { getInputProps, getRootProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div
-      {...getRootProps()}
-      className="dropzone"
-    >
-      <input {...getInputProps()} />
-      <>
-        <div>{isDragActive ? 'Release to drop' : 'Drag file here'}</div>
-      </>
+    <div style={{ padding: 20 }}>
+      <Typography variant="h4">Choose a file</Typography>
+      <div {...getRootProps()} className="dropzone">
+        <input {...getInputProps()} />
+        <>
+          <div>{isDragActive ? 'Release to drop' : 'Drag file here'}</div>
+        </>
+      </div>
+      <footer>&copy; 2020, Damien Flury</footer>
     </div>
   );
 };
