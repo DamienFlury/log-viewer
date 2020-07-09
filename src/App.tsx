@@ -5,12 +5,11 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
 } from '@material-ui/core';
 import LogList from './components/LogList';
 import { useRecoilValue } from 'recoil';
 import ChooseFile from './components/ChooseFile';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { areThereLogs } from './atoms';
 
 
@@ -25,14 +24,6 @@ function App() {
             <Typography variant="h6">Log Viewer</Typography>
           </Toolbar>
         </AppBar>
-        {/* <Switch>
-          <Route path="/list">
-            <LogList />
-          </Route>
-          <Route path="/">
-            <ChooseFile />
-          </Route>
-        </Switch> */}
         {anyLogs ? <LogList /> : <ChooseFile />}
       </BrowserRouter>
     </div>
