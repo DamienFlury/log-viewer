@@ -23,9 +23,6 @@ function App() {
         <AppBar position="sticky" style={{ top: 0 }}>
           <Toolbar>
             <Typography variant="h6">Log Viewer</Typography>
-            <Link to="/list">
-              <Button color="inherit" style={{ color: 'white'}}>List View</Button>
-            </Link>
           </Toolbar>
         </AppBar>
         {/* <Switch>
