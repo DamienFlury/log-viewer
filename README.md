@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It is deployed via Netlify and available [here](https://amazing-pike-ada129.netlify.app/).
 
 ## Available Scripts
 
