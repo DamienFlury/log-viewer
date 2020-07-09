@@ -1,21 +1,40 @@
-import React, {  useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useSetRecoilState } from 'recoil';
 import { logsAtom, Log, LogLevel } from '../atoms';
 import { Typography } from '@material-ui/core';
 
 const parseLogs = (logs: string): Log[] => {
-  const lines = logs.split('\n');
+  const lines = logs.split('\n').slice(0, -1);
   return lines.map((line) => {
-    const [date, ...dateRest] = line.split('  ');
-    const [logLevel, number, , , location, ...locationRest] = dateRest
-      .join('  ')
-      .split(' ');
+    const [
+      date,
+      ,
+      time,
+      ,
+      logLevel,
+      ,
+      number,
+      ,
+      ,
+      ,
+      location,
+      ...locationRest
+    ] = line.split(/(\s+)/);
     const [, message] = locationRest.join(' ').split(':');
+    console.log({
+      date,
+      time,
+      logLevel,
+      number,
+      location,
+      message,
+    });
 
     return {
       date,
-      level: logLevel as LogLevel,
+      time,
+      level: logLevel.trim() as LogLevel,
       number,
       location,
       message,

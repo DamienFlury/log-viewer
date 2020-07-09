@@ -3,6 +3,7 @@ export type LogLevel = 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
 
 export type Log = {
   date: string;
+  time: string;
   level: LogLevel;
   number: string;
   location: string;
