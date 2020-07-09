@@ -1,7 +1,7 @@
 import React, {  useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useSetRecoilState } from 'recoil';
-import logsAtom, { Log, LogLevel } from '../atoms';
+import { logsAtom, Log, LogLevel } from '../atoms';
 import { Typography } from '@material-ui/core';
 
 const parseLogs = (logs: string): Log[] => {

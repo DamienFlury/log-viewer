@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 export type LogLevel = 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
 
 export type Log = {
@@ -14,4 +14,13 @@ const logsAtom = atom<Log[]>({
   default: [],
 });
 
-export default logsAtom;
+const areThereLogs = selector<boolean>({
+  key: 'are-there-logs',
+  get: ({ get }) => {
+    const logs = get(logsAtom);
+    return logs.length > 0;
+  }
+})
+
+export {areThereLogs, logsAtom}
+
