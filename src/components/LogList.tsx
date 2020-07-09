@@ -38,6 +38,12 @@ const LogList = () => {
   const logs = useRecoilValue(logsAtom);
 
   const [levelFilter, setLevelFilter] = useState<LogLevel | 'ALL'>('ALL');
+  const filteredLogs = logs.filter((row) => {
+    if (levelFilter === 'ALL') {
+      return true;
+    }
+    return row.level === levelFilter;
+  });
   return (
     <div style={{ padding: '20px' }}>
       <Typography variant="h4">Logs</Typography>
@@ -63,24 +69,17 @@ const LogList = () => {
             <TableContainer component={Paper}>
               <Table>
                 <TableBody>
-                  {logs
-                    .filter((row) => {
-                      if (levelFilter === 'ALL') {
-                        return true;
-                      }
-                      return row.level === levelFilter;
-                    })
-                    .map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell
-                          style={{ background: getLevelColor(row.level) }}
-                        >
-                          {row.level}
-                        </TableCell>
-                        <TableCell>{row.date}</TableCell>
-                        <TableCell>{row.message}</TableCell>
-                      </TableRow>
-                    ))}
+                  {filteredLogs.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell
+                        style={{ background: getLevelColor(row.level) }}
+                      >
+                        {row.level}
+                      </TableCell>
+                      <TableCell>{row.date}</TableCell>
+                      <TableCell>{row.message}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -93,12 +92,12 @@ const LogList = () => {
                   {
                     label: 'Logs',
                     data: [
-                      logs.filter((log) => log.level === 'TRACE').length,
-                      logs.filter((log) => log.level === 'INFO').length,
-                      logs.filter((log) => log.level === 'DEBUG').length,
-                      logs.filter((log) => log.level === 'WARN').length,
-                      logs.filter((log) => log.level === 'ERROR').length,
-                      logs.filter((log) => log.level === 'FATAL').length,
+                      filteredLogs.filter((log) => log.level === 'TRACE').length,
+                      filteredLogs.filter((log) => log.level === 'INFO').length,
+                      filteredLogs.filter((log) => log.level === 'DEBUG').length,
+                      filteredLogs.filter((log) => log.level === 'WARN').length,
+                      filteredLogs.filter((log) => log.level === 'ERROR').length,
+                      filteredLogs.filter((log) => log.level === 'FATAL').length,
                     ],
                     backgroundColor: [
                       getLevelColor('TRACE'),
